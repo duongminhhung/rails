@@ -1,0 +1,29 @@
+<% content_for :title, "Users" %>
+<h1>Users <%= @abc %></h1>
+<%= link_to 'New User', new_admin_user_path, class: 'btn btn-primary mb-3' %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= link_to 'Show', admin_user_path(user), class: 'btn btn-info' %></td>
+        <td><%= link_to 'Edit', edit_admin_user_path(user), class: 'btn btn-warning' %></td>
+        <td>
+          <%= form_with url: admin_user_path(user), method: :delete, local: true, html: { class: 'd-inline' } do %>
+            <%= button_to 'Delete', admin_user_path(user), method: :delete, class: 'btn btn-danger', form: { class: 'd-inline' } %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,27 @@
+<%= form_with(model: @user, local: true) do |form| %>
+  <div class="mb-3">
+    <%= form.label :name, class: 'form-label' %>
+    <%= form.text_field :name, class: 'form-control' %>
+    <% if @user.errors[:name].any? %>
+      <div class="error-message">
+        <%= @user.errors[:name].first %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :email, class: 'form-label' %>
+    <%= form.email_field :email, class: 'form-control' %>
+    <% if @user.errors[:email].any? %>
+      <div class="error-message">
+        <%= @user.errors[:email].first %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Save", class: 'btn btn-primary' %>
+  </div>
+
+  <%= link_to 'Back', users_path, class: 'btn btn-secondary' %>
+<% end %>

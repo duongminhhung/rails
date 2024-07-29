@@ -1,0 +1,31 @@
+<h1>Posts List</h1>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Title</th>
+    <th>Body</th>
+    <th>User</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @posts.each do |post| %>
+    <tr>
+      <td><%= post.id %></td>
+      <td><%= post.title %></td>
+      <td><%= post.body %></td>
+      <td><%= post.user.name if post.user %></td>
+      <td>
+        <%= link_to 'Show', post_path(post), class: 'btn btn-info btn-sm' %>
+        <%= link_to 'Edit', edit_post_path(post), class: 'btn btn-warning btn-sm' %>
+        <%= link_to 'Destroy', post_path(post), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<!-- Thêm liên kết để tạo bài viết mới -->
+<%= link_to 'New Post', new_post_path, class: 'btn btn-primary' %>
