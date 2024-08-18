@@ -12,6 +12,13 @@
         <li class="nav-item">
           <%= link_to 'Posts', admin_posts_path, class: 'nav-link' %>
         </li>
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= form_with url: destroy_user_session_path, method: :delete, class: 'nav-item' do %>
+              <%= submit_tag 'Logout', class: 'btn btn-link nav-link' %>
+            <% end %>
+          </li>
+        <% end %>
       </ul>
     </div>
   </div>

@@ -9,5 +9,14 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password])
   end
 
+  def after_sign_in_path_for(resource)
+    if user_signed_in?
+      admin_users_path
+    else
+      super
+    end
+  end
+
+
 
 end
