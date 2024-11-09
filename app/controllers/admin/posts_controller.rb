@@ -1,9 +1,10 @@
 module Admin
   class PostsController < ApplicationController
     before_action :authenticate_user!
-    skip_before_action :authenticate_user!, only: [:test123]
+    after_action :verify_authorized
     def index
-      @posts = Post.includes(:user).all
+      @posts = Post.all
+      authorize Post
     end
 
     def new

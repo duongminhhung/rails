@@ -6,6 +6,9 @@ class User < ApplicationRecord
 
   validates :name, presence: { message: "Name can't be left blank" }, if: -> { @admin_context.nil? || !@admin_context }
   validates :email, presence: { message: "Email is required" }, uniqueness: { message: "Email must be unique" }
+  belongs_to :group
+  has_many :user_permissions
+  has_many :permissions, through: :user_permissions
 
   def self.admin_role
     User.instance_eval { @admin_context = true }

@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_28_064716) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_09_160026) do
+  create_table "groups", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "permissions", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "posts", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -19,6 +31,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_28_064716) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["deleted_at"], name: "index_posts_on_deleted_at"
+  end
+
+  create_table "user_permissions", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "permission_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["permission_id"], name: "index_user_permissions_on_permission_id"
+    t.index ["user_id"], name: "index_user_permissions_on_user_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -31,8 +52,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_28_064716) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.integer "group_id", null: false
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
+    t.index ["group_id"], name: "index_users_on_group_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "user_permissions", "permissions"
+  add_foreign_key "user_permissions", "users"
 end

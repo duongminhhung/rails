@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
+  include Pundit
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def not_found
     render status: 404, file: 'public/404.html', layout: false
@@ -16,6 +18,15 @@ class ApplicationController < ActionController::Base
       super
     end
   end
+  private
+
+  def user_not_authorized(exception)
+    flash.now[:alert] = "You are not authorized to perform this action."
+
+    render 'errors/unauthorized', status: :forbidden
+  end
+
+
 
 
 
