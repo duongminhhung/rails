@@ -3,7 +3,7 @@ class Post < ApplicationRecord
 
   belongs_to :user
 
-  validates :title, presence: { message: "Title can't be left blank" }
-  validates :body, presence: { message: "Body is required" }
-  validates :user_id, presence: { message: "User must be associated" }
+  validates :title, presence: { message: "can't be left blank" }
+  validates :body, presence: { message: "is required" }
+  validates :user_id, presence: { message: "must be associated" }
 end

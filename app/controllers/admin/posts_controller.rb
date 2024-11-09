@@ -3,12 +3,13 @@ module Admin
     before_action :authenticate_user!
     after_action :verify_authorized
     def index
-      @posts = Post.all
+      @posts = Post.includes(:user).where(user_id: current_user.id)
       authorize Post
     end
 
     def new
       @post = Post.new
+      authorize Post
     end
 
     def create
@@ -20,10 +21,11 @@ module Admin
           format.html { render :new, status: :unprocessable_entity }
         end
       end
+      authorize Post
     end
 
-    def test123
-      redirect_to admin_users_path
+    def show
+
     end
 
     private

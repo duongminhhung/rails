@@ -38,6 +38,20 @@ class ApplicationPolicy
   def scope
     Pundit.policy_scope!(user, record.class)
   end
+  private
+
+  def admin_or_permission?(permission_name)
+    is_admin || user_has_permission?(permission_name)
+  end
+
+  def user_has_permission?(permission_name)
+    user.permissions.exists?(name: permission_name)
+  end
+
+  def is_admin
+    user.group.name == 'Admin'
+  end
+
 
   class Scope
     attr_reader :user, :scope
