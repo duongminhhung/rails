@@ -1,15 +1,13 @@
 module Admin
   class PostsController < ApplicationController
-    before_action :authenticate_user!
+    before_action :authenticate_user!,:authorize_post, only: [:index,:new,:create,:show]
     after_action :verify_authorized
     def index
       @posts = Post.includes(:user).where(user_id: current_user.id)
-      authorize Post
     end
 
     def new
       @post = Post.new
-      authorize Post
     end
 
     def create
@@ -21,7 +19,6 @@ module Admin
           format.html { render :new, status: :unprocessable_entity }
         end
       end
-      authorize Post
     end
 
     def show
@@ -32,6 +29,10 @@ module Admin
       def post_params
         params.require(:post).permit(:title, :body, :user_id)
       end
+      def authorize_post
+        authorize Post
+      end
+
 
   end
 end

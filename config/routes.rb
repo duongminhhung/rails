@@ -7,6 +7,5 @@ Rails.application.routes.draw do
     resources :users
     resources :posts
   end
-  get '/', to: 'admin/posts#test123'
   match '*path', to: 'application#not_found', via: :all
 end
