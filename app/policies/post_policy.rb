@@ -4,7 +4,7 @@ class PostPolicy < ApplicationPolicy
   end
 
   def show?
-    admin_or_permission?('view_posts')
+    admin_or_permission?('view_post')
   end
 
   def create?

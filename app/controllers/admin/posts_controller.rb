@@ -1,6 +1,7 @@
 module Admin
   class PostsController < ApplicationController
-    before_action :authenticate_user!,:authorize_post, only: [:index,:new,:create,:show]
+    before_action :authenticate_user!
+    before_action :authorize_post, only: [:index,:new,:create,:show]
     after_action :verify_authorized
     def index
       # custome where exits
@@ -33,7 +34,10 @@ module Admin
     end
 
     def show
-
+      @post = Post.where(id: params[:id])
+                  .where_assoc_exists(:user)
+                  .includes(:user)
+                  .first
     end
 
     private
