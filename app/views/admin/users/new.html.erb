@@ -4,7 +4,7 @@
     <%= form.text_field :name, class: 'form-control' %>
     <% if @user.errors[:name].any? %>
       <div class="error-message">
-        <%= @user.errors[:name].first %>
+        <%= @user.errors.full_messages_for(:name).first %>
       </div>
     <% end %>
   </div>
@@ -14,7 +14,7 @@
     <%= form.email_field :email, class: 'form-control' %>
     <% if @user.errors[:email].any? %>
       <div class="error-message">
-        <%= @user.errors[:email].first %>
+        <%= @user.errors.full_messages_for(:email).first %>
       </div>
     <% end %>
   </div>

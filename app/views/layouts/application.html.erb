@@ -13,10 +13,9 @@
 <body>
 <%= render 'layouts/navbar' %>
 <div class="container mt-4">
-  <% if flash.any? %>
-    <div class="alert alert-<%= flash[:type] || 'info' %>">
-      <%= flash[:notice] %>
-      <%= flash[:alert] %>
+  <% if (flash[:notice] && flash[:notice].length > 0) || (flash[:alert] && flash[:alert].length > 0) %>
+    <div class="alert alert-<%= flash[:notice] ? 'success' : 'danger' %>">
+      <%= flash[:notice] || flash[:alert] %>
     </div>
   <% end %>
   <%= yield %>
