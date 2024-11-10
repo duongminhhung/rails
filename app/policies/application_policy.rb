@@ -45,11 +45,11 @@ class ApplicationPolicy
   end
 
   def user_has_permission?(permission_name)
-    user.permissions.exists?(name: permission_name)
+    user && user.permissions.exists?(name: permission_name)
   end
 
   def is_admin
-    user.group.name == 'Admin'
+    user && user.group.name == 'Admin'
   end
 
 
