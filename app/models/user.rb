@@ -4,8 +4,8 @@ class User < ApplicationRecord
   acts_as_paranoid
   has_many :posts, dependent: :destroy
 
-  validates :name, presence: { message: "Name can't be left blank" }, if: -> { @admin_context.nil? || !@admin_context }
-  validates :email, presence: { message: "Email is required" }, uniqueness: { message: "Email must be unique" }
+  validates :name, presence:true
+  validates :email, presence:true
   belongs_to :group
   has_many :user_permissions
   has_many :permissions, through: :user_permissions
