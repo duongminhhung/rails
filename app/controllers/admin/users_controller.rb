@@ -62,6 +62,13 @@ module Admin
       end
     end
 
+    def send_email
+      @user = User.find(params[:id])
+      UserMailer.welcome_email(@user).deliver_later
+      redirect_to admin_users_path, notice: 'Email sent!'
+    end
+
+
     private
       # Use callbacks to share common setup or constraints between actions.
       def set_user

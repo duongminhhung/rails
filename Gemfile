@@ -16,6 +16,7 @@ gem 'paranoia', '~> 2.1', '>= 2.1.5'
 gem 'devise', '~> 4.9', '>= 4.9.3'
 gem 'pundit'
 gem 'activerecord_where_assoc'
+gem "dotenv"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
