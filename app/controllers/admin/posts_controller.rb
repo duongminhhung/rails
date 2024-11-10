@@ -23,17 +23,14 @@ module Admin
     end
 
     def create
-
-      SampleJob.perform_later(post_params)
-
-      # @post = Post.new(post_params)
-      # respond_to do |format|
-      #   if @post.save
-      #     format.html { redirect_to post_params, notice: 'Post was successfully created.' }
-      #   else
-      #     format.html { render :new, status: :unprocessable_entity }
-      #   end
-      # end
+      @post = Post.new(post_params)
+      respond_to do |format|
+        if @post.save
+          format.html { redirect_to post_params, notice: 'Post was successfully created.' }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+        end
+      end
     end
 
     def show
